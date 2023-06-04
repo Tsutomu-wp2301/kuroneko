@@ -1,6 +1,11 @@
 <div class="col-lg-4">
+                <?php if ( is_active_sidebar('sidebar-widget-area')) : ?>
                     <aside class="sidebar">
-                        <div class="widget_block">
+                        <?php dynamic_sidebar('sidebar-widget-area'); ?>
+                    </aside>
+                <?php endif; ?>
+
+                        <!-- <div class="widget_block">
                             <h2>カテゴリー</h2>
                             <ul class="wp-block-categories-list wp-block-categories">
                                 <li><a href="#">お知らせ</a></li>
@@ -17,6 +22,5 @@
                                 <li><a href="#">2020年10月</a></li>
                                 <li><a href="#">2020年9月</a></li>
                             </ul>
-                        </div>
-                    </aside>
+                        </div> -->
                 </div>
