@@ -15,7 +15,7 @@
                                     <?php the_title(); ?>
                                 </h1>
                                 <div class="content-Meta">
-                                    <a href="#">ミディアム</a>
+                                    <?php the_terms(get_the_ID(), 'hairstyletype'); ?>
                                 </div>
                             </header>
                             <div class="content-Body">
