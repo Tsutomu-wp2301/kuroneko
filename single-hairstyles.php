@@ -43,7 +43,7 @@
                     <?php endif; ?>
                     </main>
                 </div>
-                <?php get_sidebar(); ?>
+                <?php get_sidebar('hairstyles'); ?>
             </div>
         </div>
        <?php get_footer(); ?>

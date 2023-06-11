@@ -38,45 +38,35 @@
                 <section class="home-Style">
                     <h2 class="home-Style_Title">ヘアスタイル<span>Hairstyles</span></h2>
                     <div class="row">
-                        <div class="col-6 col-md-3">
-                            <div class="module-Style_Item">
-                                <a href="#" class="module-Style_Item_Link" title="メンズパーマ">
-                                    <figure class="module-Style_Item_Img">
-                                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/hairstyle4.png" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <div class="module-Style_Item">
-                                <a href="#" class="module-Style_Item_Link" title="前髪ありキュートボブ">
-                                    <figure class="module-Style_Item_Img">
-                                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/hairstyle3.png" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <div class="module-Style_Item">
-                                <a href="#" class="module-Style_Item_Link" title="メンズカット">
-                                    <figure class="module-Style_Item_Img">
-                                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/hairstyle2.png" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <div class="module-Style_Item">
-                                <a href="#" class="module-Style_Item_Link" title="大人ミディアム">
-                                    <figure class="module-Style_Item_Img">
-                                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/hairstyle1.png" alt="">
-                                    </figure>
-                                </a>
-                            </div>
-                        </div>
+                        <?php /* サブループ開始 */
+                        $neko_args = array(
+                            'post_type'       => 'hairstyles',  /* 出力する投稿タイプ */
+                            'posts_per_page'  => '4',  /* 表示数 */
+                        );
+                        $neko_hairstyles_query = new WP_Query($neko_args);
+                        if($neko_hairstyles_query->have_posts()) : 
+                        ?>
+                            <?php while($neko_hairstyles_query->have_posts()) :
+                            $neko_hairstyles_query->the_post();
+                            ?>
+                                <div class="col-6 col-md-3">
+                                    <div id="post-<?php the_ID(); ?>" <?php post_class('module-Style.Item');?>>
+                                        <a href="<?php the_permalink();?>" class="module-Style_Item_Link" title="<?php the_title();?>">
+                                            <figure class="module-Style_Item_Img">
+                                                <?php if (has_post_thumbnail()) : ?><!-- アイキャッチがあれば表示する条件分岐 -->
+                                                    <?php the_post_thumbnail('page_eyecatch'); ?>
+                                                <?php else: ?><!-- アイキャッチ画像が無ければ指定したファイル画像を表示 -->
+                                                    <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/img/dummy-image_lg.png" alt="" width="400" height="400" load="lazy">
+                                                <?php endif; ?>
+                                            </figure>
+                                        </a>
+                                    </div>
+                                </div>
+                            <?php endwhile; wp_reset_postdata(); ?>
+                        <?php endif; ?><!-- サブループ終了 -->
                     </div>
                     <p class="home-Style_More">
-                        <a href="#" class="home-Style_More_Link">もっと見る</a>
+                        <a href="<?php echo esc_url(home_url('hairstyles'));?>" class="home-Style_More_Link">もっと見る</a>
                     </p>
                 </section>
                 <section class="home-ShopInfo">
